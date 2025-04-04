@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bear Park - Multiplayer Cooperation Game</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen">
+            <div class="logo">
+                <h1>Bear Park</h1>
+                <p>Cooperative multiplayer adventure</p>
+            </div>
+            <div class="menu">
+                <button id="create-room-btn" class="btn primary">Create Room</button>
+                <button id="join-room-btn" class="btn secondary">Join Room</button>
+                <div class="dev-credit">
+                    <p>Developed by <a href="https://github.com/yourusername" target="_blank">YourName</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Room Creation Screen -->
+        <div id="create-room-screen" class="screen hidden">
+            <h2>Create a Room</h2>
+            <div class="form-group">
+                <label for="username-create">Your Name</label>
+                <input type="text" id="username-create" placeholder="Enter your name" maxlength="12">
+            </div>
+            <div class="form-group">
+                <label for="game-mode">Game Mode</label>
+                <select id="game-mode">
+                    <option value="classic">Classic Piko Park</option>
+                    <option value="race">Time Race</option>
+                    <option value="puzzle">Team Puzzle</option>
+                    <option value="memory">Memory Challenge</option>
+                </select>
+            </div>
+            <button id="start-room-btn" class="btn primary">Start Room</button>
+            <button id="back-to-start-btn" class="btn secondary">Back</button>
+        </div>
+
+        <!-- Join Room Screen -->
+        <div id="join-room-screen" class="screen hidden">
+            <h2>Join a Room</h2>
+            <div class="form-group">
+                <label for="username-join">Your Name</label>
+                <input type="text" id="username-join" placeholder="Enter your name" maxlength="12">
+            </div>
+            <div class="form-group">
+                <label for="room-id">Room ID</label>
+                <input type="text" id="room-id" placeholder="Enter room ID">
+            </div>
+            <button id="join-room-confirm-btn" class="btn primary">Join Room</button>
+            <button id="back-to-start-btn-2" class="btn secondary">Back</button>
+        </div>
+
+        <!-- Lobby Screen -->
+        <div id="lobby-screen" class="screen hidden">
+            <h2>Room: <span id="room-code-display"></span></h2>
+            <div class="lobby-content">
+                <div class="players-list">
+                    <h3>Players (<span id="player-count">1</span>/10)</h3>
+                    <ul id="players-list">
+                        <!-- Players will be added here -->
+                    </ul>
+                </div>
+                <div class="game-info">
+                    <h3>Game Mode: <span id="game-mode-display">Classic Piko Park</span></h3>
+                    <p>Share this room code with friends:</p>
+                    <div class="room-code-container">
+                        <input type="text" id="room-code-copy" readonly>
+                        <button id="copy-room-code-btn" class="btn small">Copy</button>
+                    </div>
+                    <div class="mic-controls">
+                        <button id="toggle-mic-btn" class="btn small">🎤 Enable Mic</button>
+                        <div id="mic-status">Microphone: Off</div>
+                    </div>
+                </div>
+            </div>
+            <button id="start-game-btn" class="btn primary">Start Game</button>
+            <button id="leave-lobby-btn" class="btn secondary">Leave Room</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen hidden">
+            <div class="game-header">
+                <div class="game-info">
+                    <span id="game-mode-indicator">Classic</span>
+                    <span id="game-timer">00:00</span>
+                </div>
+                <div class="players-in-game">
+                    <!-- Player indicators will be added here -->
+                </div>
+            </div>
+            <canvas id="game-canvas"></canvas>
+            <div class="game-chat">
+                <div id="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Type a message...">
+                    <button id="send-chat-btn">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="screen hidden">
+            <h2>Game Over!</h2>
+            <div id="game-results">
+                <!-- Results will be displayed here -->
+            </div>
+            <button id="play-again-btn" class="btn primary">Play Again</button>
+            <button id="return-to-lobby-btn" class="btn secondary">Return to Lobby</button>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="bgm" loop>
+        <source src="assets/sounds/bgm.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
